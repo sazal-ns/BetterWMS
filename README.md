@@ -14,7 +14,7 @@ L.tileLayer.betterWms(wms url, {
         opacity: 1,
         attribution: "attribution",
     });
-
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
