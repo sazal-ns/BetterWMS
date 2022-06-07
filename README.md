@@ -1,4 +1,13 @@
 # BetterWMS
 Leaflet WMS + GetFeatureInfo
 
-Copied from: https://gist.github.com/rclark/6908938
+Forked from https://github.com/jfaraklit/BetterWMS
+
+L.tileLayer.betterWms(wms url, {
+        layers: "layer",
+        format: 'image/png',
+        transparent: "true",
+        style: 'style',
+        opacity: 1,
+        attribution: "attribution",
+    });

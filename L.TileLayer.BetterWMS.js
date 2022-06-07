@@ -22,7 +22,10 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       url: url,
       success: function (data, status, xhr) {
         var err = typeof data === 'string' ? null : data;
-        showResults(err, evt.latlng, data);
+        //this logic is to omit blank popup
+        var doc = (new DOMParser()).parseFromString(data, 'text/html');
+        if(doc.body.innerHTML.trim().length > 0)
+          showResults(err, evt.latlng, data);
       },
       error: function (xhr, status, error) {
         showResults(error);  
@@ -50,9 +53,9 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
           query_layers: this.wmsParams.layers,
           info_format: 'text/html'
         };
-    
-    params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
-    params[params.version === '1.3.0' ? 'j' : 'y'] = point.y;
+    //use floor to fix X or Y incorrectly defined
+    params[params.version === '1.3.0' ? 'i' : 'x'] = Math.floor(point.x);
+    params[params.version === '1.3.0' ? 'j' : 'y'] = Math.floor(point.y);
     
     return this._url + L.Util.getParamString(params, this._url, true);
   },
